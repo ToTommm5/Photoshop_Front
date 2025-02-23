@@ -1,0 +1,27 @@
+{
+  "concours": [
+    {
+      "id": "1",
+      "name": "Lille Horse Event",
+      "img_url": "Img/LilleHE.png"
+    },
+    {
+      "id": "2",
+      "name": "L'étrier de Paris",
+      "img_url": "Img/Paris.png"
+    },
+    {
+      "id": "3",
+      "name": "Écuries de la motte ",
+      "img_url": "Img/EDM_Logo.jpg"
+    }
+  ],
+  "photos": [
+    { "id": "1", "img_url": "Img/img1.jpg", "concoursId": "1" },
+    { "id": "2", "img_url": "Img/img2.jpg", "concoursId": "1" },
+    { "id": "3", "img_url": "Img/img3.jpg", "concoursId": "2" },
+    { "id": "4", "img_url": "Img/img4.jpg", "concoursId": "2" },
+    { "id": "5", "img_url": "Img/img5.jpg", "concoursId": "3" },
+    { "id": "6", "img_url": "Img/img6.jpg", "concoursId": "3" }
+  ]
+}
