@@ -1,0 +1,15 @@
+<header>
+  <div class="logo">
+    <a [routerLink]="['/']">
+      <img src="Logo-site.png" alt="Logo de mon site" />
+    </a>
+  </div>
+
+  <div class="cart">
+    <a routerLink="/panier">
+      <img src="Img/Panier.jpg" alt="Panier" />
+      <span class="cart-count">{{ cartCount }}</span>
+      <!-- Remplace 3 par le nombre d'articles dans le panier -->
+    </a>
+  </div>
+</header>
