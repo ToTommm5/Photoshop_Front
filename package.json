@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "gh-pages -d dist/browser --repo https://github.com/ToTommm5/Photoshop_Front.git"
+    "deploy": "ng deploy --base-href=/Photoshop_Front/"
   },
   "private": true,
   "dependencies": {
