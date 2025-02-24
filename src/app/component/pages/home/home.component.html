@@ -1,0 +1,17 @@
+<div class="title">
+  <h2>Bienvenue sur PhotoShop</h2>
+  <p>Retrouverez toutes les photos de nos derniers evenements</p>
+</div>
+
+<div class="concours-container">
+  <div *ngFor="let concours of concours" class="concours-card">
+    <a [routerLink]="['/concours', concours.id]">
+      <img
+        [src]="concours.img_url"
+        [alt]="concours.name"
+        class="concours-img"
+      />
+      <p>{{ concours.name }}</p>
+    </a>
+  </div>
+</div>

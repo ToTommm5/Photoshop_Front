@@ -1,0 +1,36 @@
+<div class="concours-details">
+  <h2>{{ concoursDetails?.name }}</h2>
+  <img [src]="concoursDetails?.img_url" alt="{{ concoursDetails?.name }}" />
+</div>
+<div class="photos-container">
+  <h3>Photos du concours</h3>
+  <div *ngFor="let photo of photos; let i = index" class="photo-card">
+    <img
+      [src]="photo.img_url"
+      [alt]="'Photo ' + photo.id"
+      class="photo-img"
+      (click)="openLightbox(i)"
+    />
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" *ngIf="lightboxOpen" (click)="closeLightbox()">
+  <div class="lightbox-content" (click)="$event.stopPropagation()">
+    <button class="nav-button prev" (click)="prevPhoto()">&#10094;</button>
+    <img [src]="photos[currentPhotoIndex]?.img_url" alt="Photo en grand" />
+    <button class="nav-button next" (click)="nextPhoto()">&#10095;</button>
+    <button class="close-button" (click)="closeLightbox()">✖</button>
+
+    <!-- Bouton Ajouter au panier visible uniquement dans la lightbox -->
+    <button
+      class="add-cart-button"
+      (click)="addToCart(photos[currentPhotoIndex])"
+    >
+      Ajouter au panier
+    </button>
+    <div *ngIf="showToast" class="toast-message">
+      Article ajouté au panier !
+    </div>
+  </div>
+</div>
