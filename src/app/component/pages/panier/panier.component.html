@@ -31,7 +31,7 @@
       />
 
       <p>Prix : {{ item.price * item.quantity }}€</p>
-      <button>🚮</button>
+      <button class="delete" (click)="supprimer(item.photo.id)">❌</button>
     </div>
   </div>
 

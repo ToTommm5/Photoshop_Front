@@ -7,9 +7,13 @@ import { PanierItem } from '../Models/panier-item.model';
 })
 export class PanierService {
   private panierItem: PanierItem[] = [];
-  private cartCount = new BehaviorSubject<number>(0); // Création du BehaviorSubject
+  private cartItemsSubject = new BehaviorSubject<PanierItem[]>([]); // Utilisation de BehaviorSubject pour les items
+  cartItems$ = this.cartItemsSubject.asObservable(); // Observable des éléments du panier
 
-  cartCount$ = this.cartCount.asObservable(); // Observable à utiliser dans le header
+  private cartCount = new BehaviorSubject<number>(0); // Gestion du nombre total d'articles
+  cartCount$ = this.cartCount.asObservable(); // Observable pour le nombre d'articles
+
+  constructor() {}
 
   addToCart(photo: any) {
     if (!photo || !photo.id) {
@@ -24,44 +28,40 @@ export class PanierService {
     if (existItem) {
       existItem.quantity++;
     } else {
-      this.panierItem.push({ photo, quantity: 1 });
+      this.panierItem.push({ photo, quantity: 1, price: 5, size: '10x15' }); // Ajout d'un prix par défaut
     }
 
-    this.updateCartCount();
-  }
-
-  updateQuantity(photoId: string, change: number) {
-    const item = this.panierItem.find((item) => item.photo.id === photoId);
-    if (item) {
-      item.quantity += change;
-      if (item.quantity <= 0) {
-        this.removeFromCart(photoId);
-      }
-    }
-    this.updateCartCount();
+    this.updateCartItems(); // Mise à jour des éléments du panier
+    this.updateCartCount(); // Mise à jour du nombre total d'articles
   }
 
   removeFromCart(photoId: string) {
     this.panierItem = this.panierItem.filter(
       (item) => item.photo.id !== photoId
     );
-    this.updateCartCount();
+    this.updateCartItems(); // Mise à jour des éléments du panier après suppression
+    this.updateCartCount(); // Mise à jour du nombre total d'articles
+  }
+
+  clearCart() {
+    this.panierItem = [];
+    this.updateCartItems(); // Mise à jour du panier après nettoyage
+    this.updateCartCount(); // Mise à jour du nombre total d'articles
   }
 
   getCartItems() {
     return this.panierItem;
   }
 
-  clearCart() {
-    this.panierItem = [];
-    this.updateCartCount();
+  private updateCartItems() {
+    this.cartItemsSubject.next([...this.panierItem]); // Mise à jour du BehaviorSubject avec le panier actuel
   }
 
   private updateCartCount() {
     const totalQuantity = this.panierItem.reduce(
       (acc, item) => acc + item.quantity,
       0
-    );
-    this.cartCount.next(totalQuantity); // Mise à jour du BehaviorSubject
+    ); // Total des articles
+    this.cartCount.next(totalQuantity); // Mise à jour du nombre d'articles avec le BehaviorSubject
   }
 }
