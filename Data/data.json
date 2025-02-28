@@ -8,12 +8,12 @@
     {
       "id": "2",
       "name": "Lille Horse Event",
-      "img_url": "/Img/LilleHE.png"
+      "img_url": "Img/LilleHE.png"
     },
     {
       "id": "3",
       "name": "Ecuries de la motte ",
-      "img_url": "/Img/Test.jpg"
+      "img_url": "Img/Test.jpg"
     }
   ],
   "photos": [
