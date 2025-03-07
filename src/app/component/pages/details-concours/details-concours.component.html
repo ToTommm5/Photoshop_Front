@@ -2,8 +2,13 @@
   <h2>{{ concoursDetails?.name }}</h2>
   <img [src]="concoursDetails?.img_url" alt="{{ concoursDetails?.name }}" />
 </div>
+
+<div class="epreuve-details">
+  <h3>{{ epreuveDetails?.name }}</h3>
+</div>
+
 <div class="photos-container">
-  <h3>Photos du concours</h3>
+  <h3>Photos de l'épreuve</h3>
   <div *ngFor="let photo of photos; let i = index" class="photo-card">
     <img
       [src]="photo.img_url"
@@ -22,7 +27,7 @@
     <button class="nav-button next" (click)="nextPhoto()">&#10095;</button>
     <button class="close-button" (click)="closeLightbox()">✖</button>
 
-    <!-- Bouton Ajouter au panier visible uniquement dans la lightbox -->
+    <!-- Bouton Ajouter au panier -->
     <button
       class="add-cart-button"
       (click)="addToCart(photos[currentPhotoIndex])"

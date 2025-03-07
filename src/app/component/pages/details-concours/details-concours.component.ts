@@ -3,8 +3,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Data } from '../../../Models/data.model'; // Importer le modèle Data
-import { ConcoursService } from '../../../services/concours.service'; // Importer le service
+import { Data } from '../../../Models/data.model';
+import { ConcoursService } from '../../../services/concours.service';
 import { PanierService } from '../../../services/panier.service';
 
 @Component({
@@ -14,34 +14,46 @@ import { PanierService } from '../../../services/panier.service';
   styleUrls: ['./details-concours.component.css'],
 })
 export class DetailsConcoursComponent implements OnInit {
-  concoursId: string = ''; // Pour stocker l'ID du concours sélectionné
-  concoursDetails: any; // Détails du concours
-  photos: any[] = []; // Liste des photos filtrées
-  concours: any[] = []; // Liste de tous les concours
+  concoursId: string = '';
+  epreuveId: string = '';
+  concoursDetails: any;
+  epreuveDetails: any;
+  photos: any[] = [];
+  concours: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private concoursService: ConcoursService, // Injection du service,
+    private concoursService: ConcoursService,
     private panierService: PanierService,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    // Charger les données depuis le service
     this.concoursService.getData().subscribe((data: Data) => {
-      this.concours = data.concours; // Stocker les concours
-      this.photos = data.photos; // Stocker les photos
+      this.concours = data.concours;
 
-      // Récupérer l'ID du concours depuis l'URL
-      this.concoursId = this.route.snapshot.paramMap.get('id')!;
+      // Récupérer les IDs depuis l'URL
+      this.concoursId = this.route.snapshot.paramMap.get('concoursId')!;
+      this.epreuveId = this.route.snapshot.paramMap.get('epreuveId')!;
+
+      // Récupérer les détails du concours
       this.concoursDetails = this.concours.find(
-        (concours) => concours.id === this.concoursId
+        (c) => c.id === this.concoursId
       );
-      this.photos = this.photos.filter(
-        (photo) => photo.concoursId === this.concoursId
-      );
+
+      // Récupérer les détails de l’épreuve
+      if (this.concoursDetails) {
+        this.epreuveDetails = this.concoursDetails.epreuves.find(
+          (e: { id: string }) => e.id === this.epreuveId
+        );
+        if (this.epreuveDetails) {
+          this.photos = this.epreuveDetails.photos;
+        }
+      }
     });
   }
+
+  // Gestion de la lightbox
   lightboxOpen: boolean = false;
   currentPhotoIndex: number = 0;
   showToast: boolean = false;
@@ -59,7 +71,7 @@ export class DetailsConcoursComponent implements OnInit {
     if (this.currentPhotoIndex > 0) {
       this.currentPhotoIndex--;
     } else {
-      this.currentPhotoIndex = this.photos.length - 1; // Retour au dernier
+      this.currentPhotoIndex = this.photos.length - 1;
     }
   }
 
@@ -67,14 +79,13 @@ export class DetailsConcoursComponent implements OnInit {
     if (this.currentPhotoIndex < this.photos.length - 1) {
       this.currentPhotoIndex++;
     } else {
-      this.currentPhotoIndex = 0; // Retour au début
+      this.currentPhotoIndex = 0;
     }
   }
 
   addToCart(photo: any) {
     this.panierService.addToCart(photo);
-    this.showToast = true; // Afficher le toast
-    // Masquer le toast après 3 secondes
+    this.showToast = true;
     setTimeout(() => {
       this.showToast = false;
     }, 3000);
