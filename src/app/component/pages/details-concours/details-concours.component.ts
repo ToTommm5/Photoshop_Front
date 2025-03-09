@@ -90,4 +90,8 @@ export class DetailsConcoursComponent implements OnInit {
       this.showToast = false;
     }, 3000);
   }
+
+  goBack(): void {
+    window.history.back();
+  }
 }

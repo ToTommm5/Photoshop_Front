@@ -17,6 +17,41 @@
   margin-bottom: 20px;
 }
 
+.epreuve-details {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Aligne les éléments aux extrémités */
+  padding: 20px;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  left: 20px; /* Fixe le bouton à gauche */
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: #333; /* Gris foncé */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+.epreuve-details h3 {
+  font-size: 24px;
+  color: #444;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
+
 .photos-container {
   margin-top: 20px;
   text-align: center;
