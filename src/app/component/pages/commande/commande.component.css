@@ -1,0 +1,75 @@
+.kanban-container {
+  display: flex;
+  flex-direction: column; /* Le titre doit être en haut et les colonnes en dessous */
+  gap: 20px;
+  margin: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px; /* Espacement sous le titre */
+  font-size: 24px;
+  color: #333; /* Couleur du titre */
+}
+
+.kanban-columns {
+  display: flex;
+  justify-content: space-between; /* Pour espacer les colonnes sur toute la largeur */
+  gap: 20px;
+  width: 100%;
+}
+
+.kanban-column {
+  flex: 1; /* Chaque colonne prend une part égale de l'espace */
+  padding: 15px;
+  background-color: #f1f1f1; /* Couleur grise très claire */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Ombre plus légère pour un effet subtil */
+}
+
+.kanban-column h3 {
+  background-color: #7f8c8d; /* Couleur gris foncé pour l'entête */
+  color: white;
+  padding: 12px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.commande-card {
+  background-color: #ffffff; /* Carte de commande avec fond blanc */
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère pour les cartes */
+}
+
+.commande-card p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #555; /* Texte en gris foncé pour plus de lisibilité */
+}
+
+.commande-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.commande-card li {
+  color: #7f8c8d; /* Couleur gris pour les articles */
+}
+
+.commande-card button {
+  background-color: #95a5a6; /* Couleur gris bleuté pour le bouton */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.commande-card button:hover {
+  background-color: #7f8c8d; /* Couleur gris foncé au survol */
+}

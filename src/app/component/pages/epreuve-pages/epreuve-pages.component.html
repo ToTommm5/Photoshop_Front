@@ -1,18 +1,26 @@
-<div *ngIf="epreuves.length > 0; else noData">
-  <h2>Épreuves de {{ concoursName }}</h2>
+<div class="epreuves-page">
+  <button class="back-button" (click)="goBack()">Retour</button>
+  <div class="concours-details">
+    <h2>{{ concoursName }}</h2>
+    <img [src]="concoursImageUrl" alt="{{ concoursName }}" />
+  </div>
 
-  <div class="epreuves-container">
-    <div
-      *ngFor="let epreuve of epreuves"
-      class="epreuve-card"
-      [routerLink]="['/detailsconcours', concoursId, epreuve.id]"
-    >
-      <img src="assets/folder-icon.png" alt="Dossier" />
-      <span>{{ epreuve.name }}</span>
+  <div *ngIf="epreuves.length > 0; else noData">
+    <h2>Épreuves de {{ concoursName }}</h2>
+
+    <div class="epreuves-container">
+      <div
+        *ngFor="let epreuve of epreuves"
+        class="epreuve-card"
+        [routerLink]="['/detailsconcours', concoursId, epreuve.id]"
+      >
+        <img src="folder-icon.png" alt="Dossier" />
+        <span>{{ epreuve.name }}</span>
+      </div>
     </div>
   </div>
-</div>
 
-<ng-template #noData>
-  <p>Aucune épreuve trouvée pour ce concours.</p>
-</ng-template>
+  <ng-template #noData>
+    <p>Aucune épreuve trouvée pour ce concours.</p>
+  </ng-template>
+</div>
