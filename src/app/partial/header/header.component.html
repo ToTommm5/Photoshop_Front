@@ -6,10 +6,15 @@
   </div>
 
   <div class="cart">
-    <a routerLink="/panier">
-      <img src="Panier.png" alt="Panier" />
-      <span class="cart-count">{{ cartCount }}</span>
-      <!-- Remplace 3 par le nombre d'articles dans le panier -->
-    </a>
+    <ul>
+      <li><a [routerLink]="['/commandes']">📦 Commandes</a></li>
+      <li>
+        <a [routerLink]="['/panier']" class="cart-link">
+          <img src="Panier.png" alt="Panier" />
+          <span class="cart-count" *ngIf="cartCount > 0">{{ cartCount }}</span>
+          <!-- Remplace 3 par le nombre d'articles dans le panier -->
+        </a>
+      </li>
+    </ul>
   </div>
 </header>

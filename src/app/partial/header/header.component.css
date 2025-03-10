@@ -3,54 +3,121 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 20px 40px; /* Augmente l'espace autour du header */
   background-color: #333; /* Couleur de fond du header */
   color: white; /* Texte en blanc */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère sous le header */
-
-  /* Logo */
-  .logo {
-    img {
-      height: 50px; /* Taille du logo */
-      width: auto;
-    }
-  }
-
-  /* Icône du panier */
-  .cart {
-    display: flex;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-
-    img {
-      width: 30px; /* Taille de l'icône du panier */
-      height: 30px;
-    }
-
-    /* Compteur d'articles dans le panier */
-    .cart-count {
-      position: absolute;
-      top: -5px;
-      right: -10px;
-
-      color: rgb(255, 0, 0);
-      font-size: 12px;
-      font-weight: bold;
-      border-radius: 50%;
-      padding: 5px;
-      min-width: 20px;
-      text-align: center;
-    }
-  }
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Ombre plus marquée */
 }
 
-/* Styles de liens dans le header */
+/* Logo */
+.logo img {
+  height: 70px; /* Augmente la taille du logo */
+  width: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+/* Conteneur des éléments de navigation */
+.cart {
+  display: flex;
+  align-items: center;
+}
+
+/* Liste des éléments dans le header */
+.cart ul {
+  list-style: none;
+  display: flex;
+  gap: 30px; /* Espacement plus large */
+  margin: 0;
+  padding: 0;
+}
+
+.cart ul li {
+  display: flex;
+  align-items: center;
+}
+
+/* Style des liens */
 header a {
   color: white;
   text-decoration: none;
+  font-size: 20px; /* Augmente la taille du texte */
+  font-weight: bold;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacement entre l'icône et le texte */
 }
 
 header a:hover {
+  color: #f39c12;
   text-decoration: underline;
+}
+
+/* Icône du panier */
+.cart-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cart-link img {
+  width: 45px; /* Augmente la taille de l'icône du panier */
+  height: 45px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cart-link:hover img {
+  transform: scale(1.1);
+}
+
+/* Compteur d'articles dans le panier */
+.cart-count {
+  position: absolute;
+  top: -10px;
+  right: -12px;
+  background: #e74c3c;
+  color: white;
+  font-size: 16px; /* Augmente la taille du compteur */
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 6px 9px;
+  min-width: 24px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .cart ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .logo img {
+    height: 60px;
+  }
+
+  header a {
+    font-size: 18px;
+  }
+
+  .cart-link img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cart-count {
+    font-size: 14px;
+    padding: 5px 8px;
+  }
 }

@@ -12,6 +12,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 export class EpreuvePagesComponent implements OnInit {
   concoursId!: string;
   concoursName!: string;
+  concoursImageUrl!: string;
   epreuves: any[] = [];
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
@@ -29,10 +30,14 @@ export class EpreuvePagesComponent implements OnInit {
           if (concours) {
             this.concoursName = concours.name;
             this.epreuves = concours.epreuves;
+            this.concoursImageUrl = concours.img_url;
           }
         },
         (error) => console.error('Erreur de chargement des épreuves :', error)
       );
     });
+  }
+  goBack(): void {
+    window.history.back();
   }
 }
