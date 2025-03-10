@@ -1,0 +1,127 @@
+[
+  {
+    "id": 1,
+    "client": "Client 1",
+    "panier": [
+      {
+        "photo": {
+          "id": 1,
+          "url": "assets/photo1.jpg",
+          "name": "Photo 1"
+        },
+        "quantity": 2,
+        "price": 20,
+        "size": "M"
+      },
+      {
+        "photo": {
+          "id": 2,
+          "url": "assets/photo2.jpg",
+          "name": "Photo 2"
+        },
+        "quantity": 1,
+        "price": 30,
+        "size": "L"
+      }
+    ],
+    "total": "70€",
+    "statut": "En préparation",
+    "date": "10/03/2020"
+  },
+  {
+    "id": 2,
+    "client": "Client 2",
+    "panier": [
+      {
+        "photo": {
+          "id": 3,
+          "url": "assets/photo3.jpg",
+          "name": "Photo 3"
+        },
+        "quantity": 1,
+        "price": 25,
+        "size": "S"
+      },
+      {
+        "photo": {
+          "id": 4,
+          "url": "assets/photo4.jpg",
+          "name": "Photo 4"
+        },
+        "quantity": 3,
+        "price": 15,
+        "size": "M"
+      }
+    ],
+    "total": "70€",
+    "statut": "Prête",
+    "date": "12/03/2020"
+  },
+  {
+    "id": 3,
+    "client": "Client 3",
+    "panier": [
+      {
+        "photo": {
+          "id": 5,
+          "url": "assets/photo5.jpg",
+          "name": "Photo 5"
+        },
+        "quantity": 2,
+        "price": 40,
+        "size": "L"
+      }
+    ],
+    "total": "80€",
+    "statut": "Livrée",
+    "date": "15/03/2020"
+  },
+  {
+    "id": 4,
+    "client": "Client 4",
+    "panier": [
+      {
+        "photo": {
+          "id": 6,
+          "url": "assets/photo6.jpg",
+          "name": "Photo 6"
+        },
+        "quantity": 4,
+        "price": 50,
+        "size": "XL"
+      }
+    ],
+    "total": "200€",
+    "statut": "En préparation",
+    "date": "17/03/2020"
+  },
+  {
+    "id": 5,
+    "client": "Client 5",
+    "panier": [
+      {
+        "photo": {
+          "id": 7,
+          "url": "assets/photo7.jpg",
+          "name": "Photo 7"
+        },
+        "quantity": 1,
+        "price": 60,
+        "size": "M"
+      },
+      {
+        "photo": {
+          "id": 8,
+          "url": "assets/photo8.jpg",
+          "name": "Photo 8"
+        },
+        "quantity": 2,
+        "price": 30,
+        "size": "L"
+      }
+    ],
+    "total": "120€",
+    "statut": "Livrée",
+    "date": "20/03/2020"
+  }
+]
