@@ -1,3 +1,10 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* S'assure que la page prend toute la hauteur de la fenêtre */
+  flex: 1; /* Permet au contenu principal de prendre l'espace restant */
+}
+
 .concours-details {
   text-align: center;
   padding: 20px;

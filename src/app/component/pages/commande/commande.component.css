@@ -3,6 +3,9 @@
   flex-direction: column; /* Le titre doit être en haut et les colonnes en dessous */
   gap: 20px;
   margin: 20px;
+
+  min-height: 100vh; /* S'assure que la page prend toute la hauteur de la fenêtre */
+  flex: 1; /* Permet au contenu principal de prendre l'espace restant */
 }
 
 h2 {
