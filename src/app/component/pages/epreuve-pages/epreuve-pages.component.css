@@ -2,6 +2,11 @@
   position: relative; /* Pour que le bouton reste dans ce conteneur */
   padding: 20px;
   text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* S'assure que la page prend toute la hauteur de la fenêtre */
+  flex: 1; /* Permet au contenu principal de prendre l'espace restant */
 }
 
 .back-button {

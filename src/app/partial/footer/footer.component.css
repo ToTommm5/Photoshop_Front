@@ -1,0 +1,87 @@
+/* Style global pour le footer */
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 40px;
+  background-color: #222; /* Couleur sombre pour contraster avec le header */
+  color: white;
+  box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: auto;
+}
+
+/* Contenu du footer */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Liens du footer */
+.footer-links {
+  display: flex;
+  gap: 30px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #f39c12;
+  text-decoration: underline;
+}
+
+/* Réseaux sociaux */
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #333;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.social-icons a:hover {
+  background: #f39c12;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Copyright */
+.copyright {
+  margin-top: 20px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-links {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

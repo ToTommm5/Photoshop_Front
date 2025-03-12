@@ -1,22 +1,24 @@
-<div class="concours-details">
-  <h2>{{ concoursDetails?.name }}</h2>
-  <img [src]="concoursDetails?.img_url" alt="{{ concoursDetails?.name }}" />
-</div>
+<div class="main-container">
+  <div class="concours-details">
+    <h2>{{ concoursDetails?.name }}</h2>
+    <img [src]="concoursDetails?.img_url" alt="{{ concoursDetails?.name }}" />
+  </div>
 
-<div class="epreuve-details">
-  <button class="back-button" (click)="goBack()">Retour</button>
-  <h3>{{ epreuveDetails?.name }}</h3>
-</div>
+  <div class="epreuve-details">
+    <button class="back-button" (click)="goBack()">Retour</button>
+    <h3>{{ epreuveDetails?.name }}</h3>
+  </div>
 
-<div class="photos-container">
-  <h3>Photos de l'épreuve</h3>
-  <div *ngFor="let photo of photos; let i = index" class="photo-card">
-    <img
-      [src]="photo.img_url"
-      [alt]="'Photo ' + photo.id"
-      class="photo-img"
-      (click)="openLightbox(i)"
-    />
+  <div class="photos-container">
+    <h3>Photos de l'épreuve</h3>
+    <div *ngFor="let photo of photos; let i = index" class="photo-card">
+      <img
+        [src]="photo.img_url"
+        [alt]="'Photo ' + photo.id"
+        class="photo-img"
+        (click)="openLightbox(i)"
+      />
+    </div>
   </div>
 </div>
 
