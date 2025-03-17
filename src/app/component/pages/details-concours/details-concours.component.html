@@ -1,25 +1,52 @@
 <div class="main-container">
-  <div class="concours-details">
-    <h2>{{ concoursDetails?.name }}</h2>
-    <img [src]="concoursDetails?.img_url" alt="{{ concoursDetails?.name }}" />
-  </div>
-
-  <div class="epreuve-details">
-    <button class="back-button" (click)="goBack()">Retour</button>
-    <h3>{{ epreuveDetails?.name }}</h3>
-  </div>
-
-  <div class="photos-container">
-    <h3>Photos de l'épreuve</h3>
-    <div *ngFor="let photo of photos; let i = index" class="photo-card">
+  <!-- Hero section with concours details -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>{{ concoursDetails?.name }}</h1>
       <img
-        [src]="photo.img_url"
-        [alt]="'Photo ' + photo.id"
-        class="photo-img"
-        (click)="openLightbox(i)"
+        [src]="concoursDetails?.img_url"
+        alt="{{ concoursDetails?.name }}"
+        class="hero-image"
       />
     </div>
   </div>
+
+  <!-- Navigation breadcrumb -->
+  <div class="navigation-bar">
+    <button class="back-button" (click)="goBack()">
+      <span class="back-icon">←</span>
+      <span>Retour</span>
+    </button>
+    <h2 class="current-epreuve">{{ epreuveDetails?.name }}</h2>
+  </div>
+
+  <!-- Photos grid section -->
+  <section class="photos-section">
+    <div class="section-header">
+      <h2>Photos de l'épreuve</h2>
+      <p class="photo-count">{{ photos?.length }} photos disponibles</p>
+    </div>
+
+    <div class="photos-grid">
+      <div
+        *ngFor="let photo of photos; let i = index"
+        class="photo-card"
+        (click)="openLightbox(i)"
+      >
+        <div class="photo-wrapper">
+          <img
+            [src]="photo.img_url"
+            [alt]="'Photo ' + photo.id"
+            class="photo-img"
+          />
+          <div class="photo-overlay">
+            <span class="view-icon">🔍</span>
+            <span class="view-text">Agrandir</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- Lightbox -->
@@ -30,15 +57,18 @@
     <button class="nav-button next" (click)="nextPhoto()">&#10095;</button>
     <button class="close-button" (click)="closeLightbox()">✖</button>
 
-    <!-- Bouton Ajouter au panier -->
     <button
       class="add-cart-button"
       (click)="addToCart(photos[currentPhotoIndex])"
     >
-      Ajouter au panier
+      <span class="cart-icon">🛒</span>
+      <span>Ajouter au panier</span>
     </button>
-    <div *ngIf="showToast" class="toast-message">
-      Article ajouté au panier !
-    </div>
   </div>
+</div>
+
+<!-- Toast Message -->
+<div *ngIf="showToast" class="toast-message">
+  <span class="toast-icon">✓</span>
+  <span>Article ajouté au panier !</span>
 </div>

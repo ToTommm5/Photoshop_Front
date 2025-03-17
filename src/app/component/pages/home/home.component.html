@@ -1,18 +1,26 @@
-<div class="main-content">
+<div class="hero-section">
   <div class="title">
     <h2>Bienvenue sur PhotoShop</h2>
-    <p>Retrouverez toutes les photos de nos derniers evenements</p>
+    <p class="subtitle">
+      Retrouverez toutes les photos de nos derniers evenements
+    </p>
   </div>
+</div>
 
+<div class="main-content">
   <div class="concours-container">
     <div *ngFor="let concours of concours" class="concours-card">
-      <a [routerLink]="['/concours', concours.id]">
-        <img
-          [src]="concours.img_url"
-          [alt]="concours.name"
-          class="concours-img"
-        />
-        <p>{{ concours.name }}</p>
+      <a [routerLink]="['/concours', concours.id]" class="card-link">
+        <div class="card-image">
+          <img
+            [src]="concours.img_url"
+            [alt]="concours.name"
+            class="concours-img"
+          />
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">{{ concours.name }}</h3>
+        </div>
       </a>
     </div>
   </div>

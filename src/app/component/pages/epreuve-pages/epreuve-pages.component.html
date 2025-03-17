@@ -1,11 +1,15 @@
 <div class="epreuves-page">
-  <button class="back-button" (click)="goBack()">Retour</button>
-  <div class="concours-details">
+  <!-- Section Concours -->
+  <div class="concours-hero">
     <h2>{{ concoursName }}</h2>
     <img [src]="concoursImageUrl" alt="{{ concoursName }}" />
   </div>
 
   <div *ngIf="epreuves.length > 0; else noData">
+    <button class="back-button" (click)="goBack()">
+      <span class="back-icon">←</span>
+      <span>Retour</span>
+    </button>
     <h2>Épreuves de {{ concoursName }}</h2>
 
     <div class="epreuves-container">
