@@ -22,7 +22,7 @@ export class EpreuvePagesComponent implements OnInit {
       this.concoursId = params.get('id') || '';
 
       // Charger le fichier JSON
-      this.http.get<any>('Data/data.json').subscribe(
+      this.http.get<any>('http://localhost:5273/api/concours').subscribe(
         (data) => {
           const concours = data.concours.find(
             (c: any) => c.id === this.concoursId
@@ -31,6 +31,10 @@ export class EpreuvePagesComponent implements OnInit {
             this.concoursName = concours.name;
             this.epreuves = concours.epreuves;
             this.concoursImageUrl = concours.img_url;
+
+            this.concoursImageUrl = concours.img_url.startsWith('http')
+              ? concours.img_url
+              : `http://localhost:5273${concours.img_url}`;
           }
         },
         (error) => console.error('Erreur de chargement des épreuves :', error)
