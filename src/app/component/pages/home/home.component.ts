@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 import { ConcoursService } from '../../../services/concours.service';
 
 @Component({
@@ -13,7 +14,6 @@ import { ConcoursService } from '../../../services/concours.service';
 })
 export class HomeComponent implements OnInit {
   concours: any[] = [];
-  serverUrl: string = 'http://localhost:5000'; // URL de ton serveur où les images sont stockées
 
   constructor(
     private http: HttpClient,
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
           ...concours,
           img_url: concours.img_url.startsWith('http')
             ? concours.img_url
-            : `http://localhost:5273${concours.img_url}`, // Compléter l'URL si nécessaire
+            : `${environment.apiUrl}${concours.img_url}`, // Compléter l'URL si nécessaire
         }));
       },
       (error) => {
