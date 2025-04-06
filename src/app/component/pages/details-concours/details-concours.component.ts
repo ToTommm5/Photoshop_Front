@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 import { Concours, Epreuve, Photo } from '../../../Models/data.model';
 import { ConcoursService } from '../../../services/concours.service';
 import { PanierService } from '../../../services/panier.service';
@@ -43,7 +44,7 @@ export class DetailsConcoursComponent implements OnInit {
           this.concoursDetails.img_url =
             this.concoursDetails.img_url.startsWith('http')
               ? this.concoursDetails.img_url
-              : `http://localhost:5273${this.concoursDetails.img_url}`;
+              : `${environment.apiUrl}${this.concoursDetails.img_url}`;
 
           this.epreuveDetails = this.concoursDetails.epreuves.find(
             (e: Epreuve) => e.id === this.epreuveId
@@ -55,7 +56,7 @@ export class DetailsConcoursComponent implements OnInit {
               id: photo.id,
               img_url: photo.img_url.startsWith('http')
                 ? photo.img_url
-                : `http://localhost:5273${photo.img_url}`,
+                : `${environment.apiUrl}${photo.img_url}`,
             }));
           }
         }
