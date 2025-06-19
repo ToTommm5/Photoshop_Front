@@ -41,5 +41,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-
-/public/Img/*.jpg # Ignore all images in the Img directory
+public/ # Ignore all images in the Img directory
