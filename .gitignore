@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 
-/public/Img/# Ignore all images in the Img directory
+/public/Img/*.jpg # Ignore all images in the Img directory
