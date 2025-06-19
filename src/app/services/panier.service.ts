@@ -21,26 +21,49 @@ export class PanierService {
       return;
     }
 
+    // ⚠️ Vérifie ici si les données existent déjà, sinon enrichis-les
+    const enrichedPhoto = {
+      ...photo,
+      nom: photo.nom ?? 'photo.jpg',
+      concoursNom: photo.concoursNom ?? 'Concours inconnu',
+      epreuveNom: photo.epreuveNom ?? 'Épreuve inconnue',
+    };
+
     const existItem = this.panierItem.find(
-      (item) => item.photo.id === photo.id
+      (item) =>
+        item.photo.id === enrichedPhoto.id &&
+        item.photo.epreuveId === enrichedPhoto.epreuveId &&
+        item.photo.concoursId === enrichedPhoto.concoursId
     );
 
     if (existItem) {
       existItem.quantity++;
     } else {
-      this.panierItem.push({ photo, quantity: 1, price: 5, size: '10x15' }); // Ajout d'un prix par défaut
+      this.panierItem.push({
+        photo: enrichedPhoto,
+        quantity: 1,
+        price: 5,
+        size: '10x15',
+      });
     }
 
-    this.updateCartItems(); // Mise à jour des éléments du panier
-    this.updateCartCount(); // Mise à jour du nombre total d'articles
+    this.updateCartItems();
+    this.updateCartCount();
   }
+  removeFromCart(photo: any) {
+    console.log('Photo à supprimer :', photo);
 
-  removeFromCart(photoId: string) {
     this.panierItem = this.panierItem.filter(
-      (item) => item.photo.id !== photoId
+      (item) =>
+        !(
+          String(item.photo.id) === String(photo.id) &&
+          String(item.photo.epreuveId) === String(photo.epreuveId) &&
+          String(item.photo.concoursId) === String(photo.concoursId)
+        )
     );
-    this.updateCartItems(); // Mise à jour des éléments du panier après suppression
-    this.updateCartCount(); // Mise à jour du nombre total d'articles
+
+    this.updateCartItems();
+    this.updateCartCount();
   }
 
   clearCart() {

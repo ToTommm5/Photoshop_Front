@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PanierService } from '../../../services/panier.service';
@@ -14,8 +15,14 @@ export class PanierComponent implements OnInit {
   totalQuantity: number = 0;
   totalPrice: number = 0;
   showToast: boolean = false;
+  afficherFormulaire: boolean = false;
+  commande = {
+    prenom: '',
+    nom: '',
+    email: '',
+  };
 
-  constructor(private panierService: PanierService) {}
+  constructor(private panierService: PanierService, private http: HttpClient) {}
 
   ngOnInit(): void {
     // Abonnement pour récupérer les éléments du panier
@@ -44,20 +51,41 @@ export class PanierComponent implements OnInit {
   }
 
   commander() {
-    alert(
-      `Commande validée ! Vous avez commandé ${this.totalQuantity} photos pour un total de ${this.totalPrice}€`
-    );
-    this.panierService.clearCart();
-    this.cartItems = [];
-    this.totalQuantity = 0;
-    this.totalPrice = 0;
+    this.afficherFormulaire = true;
   }
 
+  validerCommande() {
+    const payload = {
+      nom: this.commande.nom,
+      prenom: this.commande.prenom,
+      email: this.commande.email,
+      cartItems: this.cartItems.map((item) => ({
+        original_name: item.photo.original_name,
+        quantity: item.quantity,
+        size: item.size,
+        price: item.price,
+      })),
+    };
+
+    this.http
+      .post('http://localhost:3000/api/envoyer-commande', payload)
+      .subscribe({
+        next: () => {
+          alert('✅ Commande envoyée par email !');
+          this.panierService.clearCart(); // <-- AJOUT ICI 🔥
+          this.cartItems = []; // Optionnel, car le BehaviorSubject se mettra à jour
+          this.afficherFormulaire = false;
+        },
+        error: (error) => {
+          console.error("Erreur lors de l'envoi :", error);
+          alert("❌ Une erreur est survenue lors de l'envoi de la commande.");
+        },
+      });
+  }
   // Fonction pour supprimer un élément du panier
-  supprimer(idPhoto: string) {
-    this.panierService.removeFromCart(idPhoto);
-    this.showToast = true; // Afficher le toast
-    // Masquer le toast après 3 secondes
+  supprimer(item: any) {
+    this.panierService.removeFromCart(item.photo); // ✅ On passe uniquement la photo
+    this.showToast = true;
     setTimeout(() => {
       this.showToast = false;
     }, 3000);

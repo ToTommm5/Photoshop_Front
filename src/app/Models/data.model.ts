@@ -12,7 +12,11 @@ export interface Epreuve {
 
 export interface Photo {
   id: string;
-  img_url: string;
+  nom: string;
+  url: string;
+  // Ajoute ces deux lignes :
+  epreuveId?: string;
+  concoursId?: string;
 }
 
 export interface Data {

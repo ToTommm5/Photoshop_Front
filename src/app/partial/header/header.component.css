@@ -56,9 +56,6 @@
 }
 
 .cart-count {
-  position: absolute;
-  top: -8px;
-  right: -8px;
   background-color: #e74c3c;
   color: white;
   font-size: 0.75rem;
@@ -66,4 +63,5 @@
   border-radius: 999px;
   min-width: 18px;
   text-align: center;
+  margin-left: 0.5rem; /* espace entre "Panier" et le badge */
 }

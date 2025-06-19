@@ -3,12 +3,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from '../../../../environments/environment';
-import { Concours, Epreuve, Photo } from '../../../Models/data.model';
+import { Concours, Epreuve } from '../../../Models/data.model';
 import { ConcoursService } from '../../../services/concours.service';
 import { PanierService } from '../../../services/panier.service';
+
 @Component({
   selector: 'app-details-concours',
+  standalone: true,
   imports: [CommonModule, HttpClientModule],
   templateUrl: './details-concours.component.html',
   styleUrls: ['./details-concours.component.css'],
@@ -41,34 +42,25 @@ export class DetailsConcoursComponent implements OnInit {
         );
 
         if (this.concoursDetails) {
-          this.concoursDetails.img_url =
-            this.concoursDetails.img_url.startsWith('http')
-              ? this.concoursDetails.img_url
-              : `${environment.apiUrl}${this.concoursDetails.img_url}`;
-
+          // Pas besoin d'ajouter un préfixe à img_url si c’est un chemin relatif vers /Img/
           this.epreuveDetails = this.concoursDetails.epreuves.find(
             (e: Epreuve) => e.id === this.epreuveId
           );
 
           if (this.epreuveDetails) {
-            // ⚠️ Vérifier que les images ont bien un chemin complet
-            this.photos = this.epreuveDetails.photos.map((photo: Photo) => ({
-              id: photo.id,
-              img_url: photo.img_url.startsWith('http')
-                ? photo.img_url
-                : `${environment.apiUrl}${photo.img_url}`,
-            }));
+            this.photos = this.epreuveDetails.photos;
           }
         }
       },
       (error) => {
         console.error(
-          'Erreur lors du chargement des concours depuis l’API :',
+          'Erreur lors du chargement des concours depuis le fichier local :',
           error
         );
       }
     );
   }
+
   // Gestion de la lightbox
   lightboxOpen: boolean = false;
   currentPhotoIndex: number = 0;
@@ -84,23 +76,45 @@ export class DetailsConcoursComponent implements OnInit {
   }
 
   prevPhoto() {
-    if (this.currentPhotoIndex > 0) {
-      this.currentPhotoIndex--;
-    } else {
-      this.currentPhotoIndex = this.photos.length - 1;
-    }
+    this.currentPhotoIndex =
+      this.currentPhotoIndex > 0
+        ? this.currentPhotoIndex - 1
+        : this.photos.length - 1;
   }
 
   nextPhoto() {
-    if (this.currentPhotoIndex < this.photos.length - 1) {
-      this.currentPhotoIndex++;
-    } else {
-      this.currentPhotoIndex = 0;
-    }
+    this.currentPhotoIndex =
+      this.currentPhotoIndex < this.photos.length - 1
+        ? this.currentPhotoIndex + 1
+        : 0;
   }
 
   addToCart(photo: any) {
-    this.panierService.addToCart(photo);
+    if (!this.epreuveDetails || !this.concoursDetails) {
+      console.error('❌ Données manquantes pour l’épreuve ou le concours', {
+        epreuveDetails: this.epreuveDetails,
+        concoursDetails: this.concoursDetails,
+      });
+      alert(
+        'Erreur : impossible d’ajouter la photo au panier (données manquantes).'
+      );
+      return;
+    }
+
+    const photoCopie = {
+      ...photo,
+      epreuveId: this.epreuveDetails.id,
+      epreuveNom: this.epreuveDetails.nom,
+      concoursId: this.concoursDetails.id,
+      concoursNom: this.concoursDetails.nom,
+    };
+
+    this.panierService.addToCart({
+      ...photoCopie, // tout est mis au niveau racine
+      quantity: 1,
+      size: '10x15',
+      price: 5,
+    });
     this.showToast = true;
     setTimeout(() => {
       this.showToast = false;
